@@ -74,7 +74,7 @@ public class FlyingEnemy : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(Vector3.zero, randomRadiant);
+        //Gizmos.DrawWireSphere(Vector3.zero, randomRadiant);
         //Gizmos.DrawWireCube(cameraRect.center, cameraRect.size);
     }
 

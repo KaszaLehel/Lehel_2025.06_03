@@ -25,4 +25,12 @@ public static class Utility
 
         return new Vector2(x, y);
     }
+
+    public static Vector2 GetRandomPoint(this Rect _rect, System.Random random)
+    {
+        float x = Mathf.Lerp(_rect.xMin, _rect.xMax,  (float)random.NextDouble());   //     UnityEngine.Random.Range(_rect.xMin, _rect.xMax);
+        float y = Mathf.Lerp(_rect.yMin, _rect.yMax, (float)random.NextDouble());   //      UnityEngine.Random.Range(_rect.yMin, _rect.yMax);
+
+        return new Vector2(x, y);
+    }
 }

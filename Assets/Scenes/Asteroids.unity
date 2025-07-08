@@ -581,6 +581,7 @@ MonoBehaviour:
   - {fileID: 8060842831707432550, guid: 404ad6d95cb1d884b92839fc08a95139, type: 3}
   - {fileID: 5071210037999528802, guid: 93025f0e407490b49888a12df9a7c59a, type: 3}
   startCount: 5
+  seed: 5
 --- !u!1 &1599023562
 GameObject:
   m_ObjectHideFlags: 0
