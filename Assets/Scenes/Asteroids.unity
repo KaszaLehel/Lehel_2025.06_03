@@ -528,7 +528,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b11253174a70324b8790415334b452e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 1599023564}
+  myCollider: {fileID: 0}
+--- !u!1 &1164238298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1164238299}
+  - component: {fileID: 1164238300}
+  m_Layer: 0
+  m_Name: AsteroidManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1164238299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164238298}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1164238300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164238298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b760ec2f9e05f4abaf8164d9f68651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroids:
+  - {fileID: 8329594215115304218, guid: 9ff4d53b48e5e584995c5c27d7dbd3ab, type: 3}
+  - {fileID: 5459714711997257757, guid: bbda9065c4b6fd942b8a55030ad95cb3, type: 3}
+  - {fileID: 3627557215432931103, guid: 7d0e0c038fe06834993ac40c93b59c7f, type: 3}
+  - {fileID: 6624791602525620310, guid: 511d3f433c5e4dc42bd9c41056f5f0b2, type: 3}
+  - {fileID: 8060842831707432550, guid: 404ad6d95cb1d884b92839fc08a95139, type: 3}
+  - {fileID: 5071210037999528802, guid: 93025f0e407490b49888a12df9a7c59a, type: 3}
+  startCount: 5
 --- !u!1 &1599023562
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,3 +972,4 @@ SceneRoots:
   - {fileID: 722298424}
   - {fileID: 1131876361}
   - {fileID: 1961054741}
+  - {fileID: 1164238299}

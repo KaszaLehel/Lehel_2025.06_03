@@ -36,8 +36,14 @@ public class FlyingEnemy : MonoBehaviour
         while(true)
         {
             Vector2 velocity = Vector2.zero;
-            Vector2 targetPoint = GetInsideUnitCyrcle() * randomRadiant; //Random.insideUnitCircle * randomRadiant;
-            
+            Camera mainCamera = Camera.main;
+            Rect cameraRect = mainCamera.GetCameraRect(); //Utility.GetCameraRect(mainCamera);
+
+            Vector2 targetPoint = cameraRect.GetRandomPoint(); //Utility.GetRandomPoint(cameraRect);
+
+            //Vector2 targetPoint = GetInsideUnitCyrcle() * randomRadiant; //Random.insideUnitCircle * randomRadiant;
+
+
 
             while (Vector2.Distance(transform.position, targetPoint) > 0.01f) //(Vector2) transform.position != targetPoint)
             {
@@ -69,6 +75,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(Vector3.zero, randomRadiant);
+        //Gizmos.DrawWireCube(cameraRect.center, cameraRect.size);
     }
 
 

@@ -16,8 +16,8 @@ public class Teleporter : MonoBehaviour
     private void FixedUpdate()
     {
         //Camera screen size 
-        Rect cameraRect = GetCameraRect(mainCamera);
-        Rect objectRect = GetObjectRect(myCollider);
+        Rect cameraRect = mainCamera.GetCameraRect(); // Utility.GetCameraRect(mainCamera);
+        Rect objectRect = myCollider.GetObjectRect(); // Utility.GetObjectRect(myCollider);
 
         Vector2 p = transform.position;
 
@@ -44,19 +44,7 @@ public class Teleporter : MonoBehaviour
         }
     }
 
-    Rect GetObjectRect(Collider2D coll) { 
-        Bounds bounds = coll.bounds;
-        return new Rect(bounds.min, bounds.size);
-    }
-
-    Rect GetCameraRect(Camera cam)
-    {
-        Vector2 cameraSize = new(cam.orthographicSize * 2 * cam.aspect, cam.orthographicSize * 2);
-        Vector2 cameraCenter = cam.transform.position;
-
-        Rect cameraRect = new(cameraCenter - cameraSize / 2, cameraSize);
-        return cameraRect;
-    }
+    
 
 
     private void OnDrawGizmos()
@@ -66,8 +54,8 @@ public class Teleporter : MonoBehaviour
             return;
         }
 
-        Rect cameraRect = GetCameraRect(mainCamera);
-        Rect objectRect = GetObjectRect(myCollider);
+        Rect cameraRect = Utility.GetCameraRect(mainCamera);
+        Rect objectRect = Utility.GetObjectRect(myCollider);
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(cameraRect.center, cameraRect.size);
         Gizmos.DrawWireCube(objectRect.center, objectRect.size);
