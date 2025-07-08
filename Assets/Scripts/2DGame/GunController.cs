@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class GunController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GunController : MonoBehaviour
 
     [SerializeField] KeyCode shootKey = KeyCode.Space;
     [SerializeField] ShootingType shootingType;
+    [SerializeField] SpriteRenderer bullsEye;
+    [SerializeField] LayerMask raycastMask;
     enum ShootingType
     {
         Loop,
@@ -50,6 +53,21 @@ public class GunController : MonoBehaviour
         if (Input.GetKeyDown(shootKey))
         {
             Shoot(); //Uj elem, csak ezzel lehet ezt megoldani.
+        }
+
+        Aim();
+    }
+
+    void Aim()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, float.PositiveInfinity, raycastMask);
+
+        bullsEye.enabled = hit.collider != null;
+
+        if(hit.collider != null)
+        {
+            //hit
+            bullsEye.transform.position = hit.point;
         }
     }
 }
