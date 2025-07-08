@@ -15,5 +15,7 @@ public class CameraRayCast : MonoBehaviour
         {
             Debug.Log(hit.collider.name);
         }
+
+        
     }
 }
