@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
         Vector3 player = followed.position;
 
         Vector3 distance = (player - enemy).normalized;
-        Vector3 velocity = distance * speed;
+        Vector3 velocity = distance * maxSpeed;
         Vector3 step = velocity * Time.deltaTime;
 
         float dis = (player - enemy).magnitude;

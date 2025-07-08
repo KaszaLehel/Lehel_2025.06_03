@@ -14,9 +14,10 @@ enum EnemyState
 
 public class FlyingEnemy : MonoBehaviour
 {
-    [SerializeField] float speed = 4f;
+    [SerializeField] float maxSpeed = 4f;
     [SerializeField] float randomRadiant = 10f;
     [SerializeField] Projectile projectile;
+    [SerializeField] float smoothTime = 0.5f;
     //[SerializeField] float minWaitingTime = 2f;
     //[SerializeField] float maxWaitTime = 3f;
 
@@ -34,10 +35,13 @@ public class FlyingEnemy : MonoBehaviour
     {
         while(true)
         {
+            Vector2 velocity = Vector2.zero;
             Vector2 targetPoint = GetInsideUnitCyrcle() * randomRadiant; //Random.insideUnitCircle * randomRadiant;
-            while ((Vector2) transform.position != targetPoint)
+            
+
+            while (Vector2.Distance(transform.position, targetPoint) > 0.01f) //(Vector2) transform.position != targetPoint)
             {
-                transform.position = Vector2.MoveTowards(transform.position, targetPoint, Time.deltaTime * speed);
+                transform.position = Vector2.SmoothDamp(transform.position, targetPoint, ref velocity, smoothTime, maxSpeed, Time.deltaTime); //MoveTowards
                 yield return null;
             }
             //Debug.LogWarning("BOOOOMMMMMM");
@@ -87,7 +91,7 @@ public class FlyingEnemy : MonoBehaviour
             }
             else if(current == EnemyState.Fly)
             {
-                transform.position = Vector2.MoveTowards(transform.position, targetPoint, Time.deltaTime * speed);
+                transform.position = Vector2.MoveTowards(transform.position, targetPoint, Time.deltaTime * maxSpeed);
                 if(Vector2.Distance(transform.position, targetPoint) == 0)
                 {
                     current = EnemyState.Shoot;
@@ -109,7 +113,7 @@ public class FlyingEnemy : MonoBehaviour
 
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-        Debug.Log(diatnace * direction);
+        //Debug.Log(diatnace * direction);
 
         return Mathf.Sqrt(diatnace) * direction;
     }

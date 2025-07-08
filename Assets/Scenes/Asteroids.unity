@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 1131876362}
   - component: {fileID: 1131876364}
   - component: {fileID: 1131876365}
+  - component: {fileID: 1131876368}
   - component: {fileID: 1131876366}
   - component: {fileID: 1131876367}
   m_Layer: 6
@@ -515,6 +516,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1131876368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131876359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b11253174a70324b8790415334b452e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1599023564}
 --- !u!1 &1599023562
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,9 +769,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51e3f18ea146c443a4adaf1783061d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  maxSpeed: 25
   randomRadiant: 25
   projectile: {fileID: -5020601276552336870, guid: 84004b3336de2c046b026a90e3f5c034, type: 3}
+  smoothTime: 0.5
 --- !u!114 &1961054744
 MonoBehaviour:
   m_ObjectHideFlags: 0

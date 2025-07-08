@@ -6,7 +6,7 @@ public class Damager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Damagable damageable = other.gameObject.GetComponent<Damagable>();
+        Damagable damageable = other.gameObject.GetComponent<Damagable>();  
 
         if(damageable != null)
         {
