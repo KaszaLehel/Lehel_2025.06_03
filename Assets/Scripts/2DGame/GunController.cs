@@ -61,6 +61,7 @@ public class GunController : MonoBehaviour
     void Aim()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, float.PositiveInfinity, raycastMask);
+        
 
         bullsEye.enabled = hit.collider != null;
 
