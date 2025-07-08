@@ -7,6 +7,7 @@ public class AsteroidManager : MonoBehaviour
     [SerializeField] List<Asteroid> asteroids;
     [SerializeField] int startCount = 5;
     [SerializeField] int seed;
+    [SerializeField] float minDistanceFromCameraCenter;
 
     private void Start()
     {
@@ -20,11 +21,24 @@ public class AsteroidManager : MonoBehaviour
         {
             int randomIndex = random.Next(asteroids.Count-1);
             Asteroid a = asteroids[randomIndex];
-            Vector3 p = rect.GetRandomPoint(random);
+            Vector3 p;
+
+            do
+            {
+                p = rect.GetRandomPoint(random);
+
+            } while (Vector2.Distance(p, rect.center) < minDistanceFromCameraCenter);
+
+            
             Quaternion r = Quaternion.Euler(0, 0, (float)random.NextDouble() * 360);
             Instantiate(a, p, r, transform);
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Camera.main.GetCameraRect().center, minDistanceFromCameraCenter);
+    }
 
 }

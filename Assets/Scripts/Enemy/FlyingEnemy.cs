@@ -15,7 +15,7 @@ enum EnemyState
 public class FlyingEnemy : MonoBehaviour
 {
     [SerializeField] float maxSpeed = 4f;
-    [SerializeField] float randomRadiant = 10f;
+    //[SerializeField] float randomRadiant = 10f;
     [SerializeField] Projectile projectile;
     [SerializeField] float smoothTime = 0.5f;
     //[SerializeField] float minWaitingTime = 2f;
