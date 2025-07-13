@@ -4,7 +4,7 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour
 {
     Camera mainCamera;
-    [SerializeField] Collider2D myCollider;
+    Collider2D myCollider;
 
     private void Awake()
     {
@@ -25,6 +25,8 @@ public class Teleporter : MonoBehaviour
 
         Vector2 distance = p - cameraRect.center;
 
+        //Right Left
+
         if (cameraRect.xMax < objectRect.xMin) //right
         {
             transform.position += Vector3.left * (cameraRect.width + objectRect.width);
@@ -33,15 +35,18 @@ public class Teleporter : MonoBehaviour
         {
             transform.position += Vector3.right * (cameraRect.width + objectRect.width);
         }
+        
+        //Up Down
 
-        if (cameraRect.yMax < objectRect.yMin) //right
+        if (cameraRect.yMax < objectRect.yMin)
         {
-            transform.position += Vector3.left * (cameraRect.height + objectRect.height);
+            transform.position += Vector3.down * (cameraRect.height + objectRect.height);
         }
         else if (cameraRect.yMin > objectRect.yMax)
         {
-            transform.position += Vector3.right * (cameraRect.height + objectRect.height);
+            transform.position += Vector3.up * (cameraRect.height + objectRect.height);
         }
+
     }
 
     
