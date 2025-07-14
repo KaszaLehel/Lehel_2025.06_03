@@ -1,6 +1,5 @@
 
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -21,9 +20,12 @@ public class FlyingEnemy : MonoBehaviour
     //[SerializeField] float minWaitingTime = 2f;
     //[SerializeField] float maxWaitTime = 3f;
 
+    private Vector2 velocity = Vector2.zero;
+
     void OnEnable()
     {
-        StartCoroutine(EnemyMovement());
+        SpaceshipController player = FindAnyObjectByType<SpaceshipController>();
+        StartCoroutine(EnemyMovement(player));
     }
 
     void OnDisable()
@@ -31,11 +33,10 @@ public class FlyingEnemy : MonoBehaviour
         StopAllCoroutines();
     }
 
-    IEnumerator EnemyMovement()
+    IEnumerator EnemyMovement(SpaceshipController player)
     {
-        while(true)
+        while (true)
         {
-            Vector2 velocity = Vector2.zero;
             Camera mainCamera = Camera.main;
             Rect cameraRect = mainCamera.GetCameraRect(); //Utility.GetCameraRect(mainCamera);
 
@@ -43,32 +44,76 @@ public class FlyingEnemy : MonoBehaviour
 
             //Vector2 targetPoint = GetInsideUnitCyrcle() * randomRadiant; //Random.insideUnitCircle * randomRadiant;
 
-
-
             while (Vector2.Distance(transform.position, targetPoint) > 0.01f) //(Vector2) transform.position != targetPoint)
             {
                 transform.position = Vector2.SmoothDamp(transform.position, targetPoint, ref velocity, smoothTime, maxSpeed, Time.deltaTime); //MoveTowards
+
+                if (player != null)
+                {
+                    Vector3 direction = (player.transform.position - transform.position).normalized;
+                    float targetAngle = Vector2.SignedAngle(Vector2.up, direction);
+
+                    Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360f * Time.deltaTime);
+                }
+                
                 yield return null;
             }
-            //Debug.LogWarning("BOOOOMMMMMM");
-            Shoot();
+
+            /*Shooting*/
+            Instantiate(projectile, transform.position, transform.rotation);
+
+            /* Rotate and Soot Coroutine */
+            //Shoot(player);
+            //StartCoroutine(RotateAndShoot());
 
             yield return new WaitForSeconds(1);
         }    
     }
 
 
-    void Shoot()
+#region IEnumerator RotateAnd Shoot
+    IEnumerator RotateAndShoot()
     {
         SpaceshipController player = FindAnyObjectByType<SpaceshipController>();
+        if (player == null) yield break;
+
+        float elapse = 0f;
+        float duration = 0.3f;
+
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        float targetAngle = Vector2.SignedAngle(Vector2.up, direction);
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(0, 0, targetAngle);
+
+        while (elapse < duration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, elapse / duration); //Spherical interpolacio, not Linear Interpolacio
+            elapse += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.rotation = endRotation;
+
+        //Quaternion rotation = Quaternion.Euler(0, 0, targetAngle);    /*Ha akarjuk hogy a loves is lekovesse a targetet*/
+        Instantiate(projectile, transform.position, endRotation);
+
+    }
+#endregion
+
+
+#region Shoot and OnDrawGizmos
+    void Shoot(SpaceshipController player)
+    {
+        //SpaceshipController player = FindAnyObjectByType<SpaceshipController>();
         Vector3 direction = (player.transform.position - transform.position).normalized;
 
         float angle = Vector2.SignedAngle(Vector2.up, direction);
+
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
-
         Instantiate(projectile, transform.position, rotation);
-
-
     }
 
     private void OnDrawGizmos()
@@ -77,7 +122,7 @@ public class FlyingEnemy : MonoBehaviour
         //Gizmos.DrawWireSphere(Vector3.zero, randomRadiant);
         //Gizmos.DrawWireCube(cameraRect.center, cameraRect.size);
     }
-
+#endregion
 
 
     /*
