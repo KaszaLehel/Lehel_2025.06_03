@@ -20,7 +20,12 @@ public class FlyingEnemy : MonoBehaviour
     //[SerializeField] float minWaitingTime = 2f;
     //[SerializeField] float maxWaitTime = 3f;
 
-    private Vector2 velocity = Vector2.zero;
+    [SerializeField] float angularSpeed = 360f;
+    [SerializeField] float minDistanceToTurn = 1;
+
+    float dist;
+
+    //private Vector2 velocity = Vector2.zero;
 
     void OnEnable()
     {
@@ -37,36 +42,72 @@ public class FlyingEnemy : MonoBehaviour
     {
         while (true)
         {
+            Vector2 velocity = Vector2.zero;
             Camera mainCamera = Camera.main;
             Rect cameraRect = mainCamera.GetCameraRect(); //Utility.GetCameraRect(mainCamera);
-
+            
             Vector2 targetPoint = cameraRect.GetRandomPoint(); //Utility.GetRandomPoint(cameraRect);
+            Vector2 direction2D = targetPoint - (Vector2)transform.position;
+
+        /*A new megoldas*/
+            float targetAngle = Vector2.SignedAngle(Vector2.up, direction2D);
+            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+            Quaternion currentRotation = transform.rotation;
+
+            while(currentRotation != targetRotation)
+            {
+                currentRotation = Quaternion.RotateTowards(currentRotation, targetRotation, angularSpeed  * Time.deltaTime);
+                transform.rotation = currentRotation;
+                yield return null;
+            }
+
+
 
             //Vector2 targetPoint = GetInsideUnitCyrcle() * randomRadiant; //Random.insideUnitCircle * randomRadiant;
 
             while (Vector2.Distance(transform.position, targetPoint) > 0.01f) //(Vector2) transform.position != targetPoint)
             {
                 transform.position = Vector2.SmoothDamp(transform.position, targetPoint, ref velocity, smoothTime, maxSpeed, Time.deltaTime); //MoveTowards
-
-                if (player != null)
+                dist = Vector2.Distance(transform.position, targetPoint);
+                if(dist < minDistanceToTurn)
                 {
-                    Vector3 direction = (player.transform.position - transform.position).normalized;
-                    float targetAngle = Vector2.SignedAngle(Vector2.up, direction);
+                    direction2D = player.transform.position - transform.position;
 
-                    Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
-
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360f * Time.deltaTime);
+                    /*A new megoldas*/
+                    float targetAngle2 = Vector2.SignedAngle(Vector2.up, direction2D);
+                    targetRotation = Quaternion.Euler(0, 0, targetAngle2);
+                    currentRotation = transform.rotation;
+                    currentRotation = Quaternion.RotateTowards(currentRotation, targetRotation, angularSpeed * Time.deltaTime);
+                    transform.rotation = currentRotation;
                 }
-                
+
                 yield return null;
             }
 
             /*Shooting*/
-            Instantiate(projectile, transform.position, transform.rotation);
+            //Instantiate(projectile, transform.position, transform.rotation);
 
             /* Rotate and Soot Coroutine */
-            //Shoot(player);
+            //Shoot(player, targetRotation);
             //StartCoroutine(RotateAndShoot());
+
+
+            /*
+            direction2D = player.transform.position - transform.position;
+
+           
+            float targetAngle1 = Vector2.SignedAngle(Vector2.up, direction2D);
+            targetRotation = Quaternion.Euler(0, 0, targetAngle1);
+            currentRotation = transform.rotation;
+
+            while (currentRotation != targetRotation)
+            {
+                currentRotation = Quaternion.RotateTowards(currentRotation, targetRotation, angularSpeed * Time.deltaTime);
+                transform.rotation = currentRotation;
+                yield return null;
+            }*/
+
+            Instantiate(projectile, transform.position, transform.rotation);
 
             yield return new WaitForSeconds(1);
         }    
@@ -97,7 +138,7 @@ public class FlyingEnemy : MonoBehaviour
 
         transform.rotation = endRotation;
 
-        //Quaternion rotation = Quaternion.Euler(0, 0, targetAngle);    /*Ha akarjuk hogy a loves is lekovesse a targetet*/
+        //Quaternion rotation = Quaternion.Euler(0, 0, targetAngle);    /*Ha akarjuk hogy a shooting is lekovesse a targetet*/
         Instantiate(projectile, transform.position, endRotation);
 
     }
@@ -105,7 +146,7 @@ public class FlyingEnemy : MonoBehaviour
 
 
 #region Shoot and OnDrawGizmos
-    void Shoot(SpaceshipController player)
+    void Shoot(SpaceshipController player, Quaternion targetRotation)
     {
         //SpaceshipController player = FindAnyObjectByType<SpaceshipController>();
         Vector3 direction = (player.transform.position - transform.position).normalized;
@@ -113,6 +154,7 @@ public class FlyingEnemy : MonoBehaviour
         float angle = Vector2.SignedAngle(Vector2.up, direction);
 
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360f * Time.deltaTime);
         Instantiate(projectile, transform.position, rotation);
     }
 

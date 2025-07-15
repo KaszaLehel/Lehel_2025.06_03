@@ -11,8 +11,12 @@ GameObject:
   - component: {fileID: 7488496279003003653}
   - component: {fileID: 7060097254344120419}
   - component: {fileID: 8329594215115304218}
+  - component: {fileID: 4459579515179167523}
   - component: {fileID: 6911039247580375281}
-  m_Layer: 0
+  - component: {fileID: 8223651159004346950}
+  - component: {fileID: -1423401320147908052}
+  - component: {fileID: -6699927624348674855}
+  m_Layer: 10
   m_Name: Asteroid_01_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +105,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96de9f5e07a4e8d40b14f5fc3ef79f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minSpeed: 5
+  maxSpeed: 8
+  rb: {fileID: 4459579515179167523}
+  spriteRenderer: {fileID: 7060097254344120419}
+  damagable: {fileID: -1423401320147908052}
+  sprites: []
+--- !u!50 &4459579515179167523
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599085978924830353}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 23.41305
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 89ae695409fa48d41b1a6f035b4cfb19, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!60 &6911039247580375281
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -237,3 +274,50 @@ PolygonCollider2D:
       - {x: 0.505, y: -2.3799999}
       - {x: 1.025, y: -2.2}
   m_UseDelaunayMesh: 0
+--- !u!114 &8223651159004346950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599085978924830353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b11253174a70324b8790415334b452e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1423401320147908052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599085978924830353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9cf45937c094c429e76f1cb7feece2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 250
+  disableWhenDie:
+  - {fileID: 0}
+  currentHealth: 0
+  onDamage:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-6699927624348674855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599085978924830353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed82adf207629d45b741715f42d776c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDamage: 10
+  maxDamage: 20
+  minSpeedToDamage: 5
+  maxDamageSpeed: 20

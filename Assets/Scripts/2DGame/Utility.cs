@@ -33,4 +33,28 @@ public static class Utility
 
         return new Vector2(x, y);
     }
+
+    public static float Range(this System.Random random, float minValue, float maxValue)
+    {
+        double d = random.NextDouble();
+        return Mathf.Lerp(minValue, maxValue, (float)d);
+        //float magnitude = Mathf.Lerp(minSpeed, maxSpeed, (float)d);
+    }
+
+    public static Vector2 InsideUnitCyrcle(this System.Random random)
+    {
+        float d = (float)random.NextDouble() * Mathf.PI * 2;
+        Vector2 direction = new Vector2(Mathf.Cos(d), Mathf.Sin(d));
+        float m = (float)random.NextDouble();
+        return direction * m;
+    }
+
+    public static Vector2 OnUnitCyrcle(this System.Random random)
+    {
+        float d = (float)random.NextDouble() * Mathf.PI * 2;
+        return new Vector2(Mathf.Cos(d), Mathf.Sin(d));
+    }
+
+
+
 }

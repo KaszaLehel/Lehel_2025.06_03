@@ -450,6 +450,7 @@ MonoBehaviour:
   maxSpeed: 20
   angularSpeed: 210
   drag: 0.5
+  rbPlayer: {fileID: 1131876367}
 --- !u!114 &1131876364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +470,7 @@ MonoBehaviour:
   bullsEye: {fileID: 264403138}
   raycastMask:
     serializedVersion: 2
-    m_Bits: 951
+    m_Bits: 129
 --- !u!114 &1131876365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +518,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -589,25 +590,25 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131876359}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 10.502679
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_AngularDamping: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 56a1709192ab9c24ca50cb28802e5397, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1131876368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +918,8 @@ MonoBehaviour:
   maxSpeed: 25
   projectile: {fileID: -5020601276552336870, guid: 84004b3336de2c046b026a90e3f5c034, type: 3}
   smoothTime: 0.5
+  angularSpeed: 360
+  minDistanceToTurn: 4
 --- !u!114 &1961054744
 MonoBehaviour:
   m_ObjectHideFlags: 0
