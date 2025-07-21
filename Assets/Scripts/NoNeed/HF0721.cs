@@ -28,8 +28,7 @@ public class HF0721 : MonoBehaviour
             return transforms[0];
 
         Transform closest = transforms[0];
-        float minDist = 
-					Vector3.Distance(selfPosition, transforms[0].position);
+        float minDist = Vector3.Distance(selfPosition, transforms[0].position);
         
         for (int index = 1; index < transforms.Length; index++)
         {
