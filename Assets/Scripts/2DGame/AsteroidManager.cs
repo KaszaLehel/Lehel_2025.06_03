@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AsteroidManager : MonoBehaviour
 {
@@ -42,6 +43,12 @@ public class AsteroidManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(Camera.main.GetCameraRect().center, minDistanceFromCameraCenter);
+    }
+
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //0 lehet index is asszem.
     }
 
 }

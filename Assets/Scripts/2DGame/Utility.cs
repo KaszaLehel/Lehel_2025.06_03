@@ -3,6 +3,9 @@ using System;
 
 public static class Utility
 {
+    //& -> bitenkenti es
+    //&& -> sima es
+
     public static Rect GetObjectRect(this Collider2D coll)
     {
         Bounds bounds = coll.bounds;
