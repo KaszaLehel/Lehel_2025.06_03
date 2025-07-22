@@ -9,7 +9,8 @@ public class Damagable : MonoBehaviour
     [SerializeField] private float currentHealth;
 
     public event Action OnDamage; //C sharp szintu Event -> ha oda irjuk hogy event akkor nem lehet kivulrol invokeolni -> Action egy delegate -> Ez lehet Func is, akkor van visszateres
-            
+    public event Action OnDie; 
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -57,6 +58,8 @@ public class Damagable : MonoBehaviour
         {
             foreach (Behaviour b in disableWhenDie)
                 b.enabled = false;
+
+            OnDie?.Invoke();
         }
     }
 }

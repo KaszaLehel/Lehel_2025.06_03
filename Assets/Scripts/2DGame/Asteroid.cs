@@ -13,6 +13,8 @@ public class Asteroid : MonoBehaviour
 
     [SerializeField] Sprite[] sprites;
 
+    [SerializeField] Asteroid[] spawnOnDie;
+
 
     Vector2 velocity;
 
@@ -27,11 +29,13 @@ public class Asteroid : MonoBehaviour
     private void Awake()
     {
         damagable.OnDamage += OnDamage; // C Sharp action
+        damagable.OnDie += OnDie;
     }
 
     private void OnDestroy()
     {
         damagable.OnDamage -= OnDamage;
+        damagable.OnDie -= OnDie;
     }
 
     private void Update()
@@ -45,6 +49,19 @@ public class Asteroid : MonoBehaviour
     {
         rb.linearVelocity = random.Range(minSpeed, maxSpeed) * random.OnUnitCyrcle(); /* float * Vector2 */
     }
+
+    private void OnDie()
+    {
+        foreach(Asteroid ap in spawnOnDie)
+        {
+            Asteroid newAsteroid = Instantiate(ap, transform.position, transform.rotation, transform.parent);
+
+            newAsteroid.Setup(new System.Random());
+        }
+
+        Destroy(gameObject);
+    }
+
 
     private void OnDamage()
     {

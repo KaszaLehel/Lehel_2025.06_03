@@ -111,6 +111,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7060097254344120419}
   damagable: {fileID: -1423401320147908052}
   sprites: []
+  spawnOnDie:
+  - {fileID: 5459714711997257757, guid: bbda9065c4b6fd942b8a55030ad95cb3, type: 3}
+  - {fileID: 8060842831707432550, guid: 404ad6d95cb1d884b92839fc08a95139, type: 3}
 --- !u!50 &4459579515179167523
 Rigidbody2D:
   serializedVersion: 5
@@ -302,9 +305,6 @@ MonoBehaviour:
   disableWhenDie:
   - {fileID: 0}
   currentHealth: 0
-  onDamage:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &-6699927624348674855
 MonoBehaviour:
   m_ObjectHideFlags: 0
